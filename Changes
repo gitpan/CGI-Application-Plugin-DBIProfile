@@ -1,0 +1,14 @@
+Revision history for CGI-Application-Plugin-DBIProfile
+
+0.03    2007-09-26
+        Made graphing a plugin, and wrote custom (simple) HTML graph plugin.
+        First CPAN release.
+
+0.02    2007-09-26
+        Alpha of rewrite by Joshua Miller.
+        Uses new DBI::Profile driver that uses IO::Scalar for storage.
+        Graphs are inline html (using HTML::BarGraph, which is broken).
+
+0.01    2005-06-06
+        First version by Sam Tregar.
+
