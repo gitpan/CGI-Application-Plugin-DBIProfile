@@ -1,5 +1,11 @@
 Revision history for CGI-Application-Plugin-DBIProfile
 
+0.04    2007-09-27
+        Added Graph::SVGTT plugin.
+        Added Graph::GDGraphInline plugin.
+        Added catch for non-html docs, so we don't run then.
+        BUGFIX: for devpopup support (typo in sub reference name).
+
 0.03    2007-09-26
         Made graphing a plugin, and wrote custom (simple) HTML graph plugin.
         First CPAN release.

@@ -14,7 +14,7 @@ use Data::JavaScript;
 
 use vars qw($VERSION);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub import
 {
@@ -25,7 +25,7 @@ sub import
         # use devpopup if installed, or do our own thing.
         if ($c->can('devpopup') && $ENV{'CAP_DEVPOPUP_EXEC'})
         {
-            $c->add_callback( 'devpopup_report', \&_devpop_stop);
+            $c->add_callback( 'devpopup_report', \&_devpopup_stop);
         } else {
             $c->add_callback( 'postrun', \&_stop);
         }
@@ -44,6 +44,14 @@ sub _start
 sub _stop
 {
     my ($self, $output) = @_;
+
+    # header handling borrowed from CAP::DevPopup
+    return unless $self->header_type eq 'header';       # don't operate on redirects or 'none'
+    my %props = $self->header_props;
+    my ($type) = grep /type/i, keys %props;
+    return if defined $type and                         # no type defaults to html, so we have work to do.
+      $props{$type} !~ /html/i;                         # else skip any other types.
+
 
     our $TEMPLATE2;
 
@@ -415,7 +423,7 @@ It has two modes of opperation; per-request or per-process. In a CGI environment
 =back
 
 Under mod_perl, the per-request setup will show the DBI Profile specific to each page hit.
-The per-process setup will show the DBI Profile that has accumulated for the live of the apache process you are hitting.
+The per-process setup will show the DBI Profile that has accumulated for the life of the apache process you are hitting.
 
 Please note, running under the per-process setting can cause your memory usage to grow significantly, as the profile data is never cleared.
 
@@ -437,18 +445,56 @@ Add checks to be sure $dbh->{Profile} isn't disabled (probably better in ::Drive
 
 =head1 REQUIREMENTS
 
-    L<Data::JavaScript>
-    L<IO::Scalar>
-    L<HTML::Template>
+=over
+
+=item L<Data::JavaScript>
+
+=item L<IO::Scalar>
+
+=item L<HTML::Template>
+
+=back
+
+
+Optional:
+
+=over
+
+=item * L<GD::Graph>
+
+For CGI::Application::Plugin::DBIProfile::Graph::GDGraphInline support.
+
+=item * L<SVG::TT::Graph>
+
+For CGI::Application::Plugin::DBIProfile::Graph::SVGTT support.
+
+=item * L<HTML::BarGraph>
+
+For CGI::Application::Plugin::DBIProfile::Graph::HTMLBarGraph support.
+
+=back
 
 =head1 SEE ALSO
 
-    L<CGI::Application>
-    L<CGI::Application::Plugin::DevPopup>
-    L<CGI::Application::Plugin::DBIProfile::Data>
-    L<CGI::Application::Plugin::DBIProfile::Driver>
-    L<CGI::Application::Plugin::DBIProfile::Graph::HTML>
-    L<CGI::Application::Plugin::DBIProfile::Graph::HTMLBarGraph>
+=over
+
+=item L<CGI::Application>
+
+=item L<CGI::Application::Plugin::DevPopup>
+
+=item L<CGI::Application::Plugin::DBIProfile::Data>
+
+=item L<CGI::Application::Plugin::DBIProfile::Driver>
+
+=item L<CGI::Application::Plugin::DBIProfile::Graph::HTML>
+
+=item L<CGI::Application::Plugin::DBIProfile::Graph::HTMLBarGraph>
+
+=item L<CGI::Application::Plugin::DBIProfile::Graph::GDGraphInline>
+
+=item L<CGI::Application::Plugin::DBIProfile::Graph::SVGTT>
+
+=back
 
 =head1 SPECIAL THANKS
 

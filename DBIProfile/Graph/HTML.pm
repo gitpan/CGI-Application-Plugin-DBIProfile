@@ -172,29 +172,14 @@ Labels for each datapoint which match the labels that will be used on the sql st
 
 The easiest graphs to implement are fully inline - ie. it doesn't need to make any external calls (no <image> or <embed> tags and such). CGI::Application::Plugin::DBIProfile::Graph::HTML is an example of this. Other possible candidates are Plotr and Open Flash Chart (using js interface to populate data).
 
-In order to generate a graph that isn't pure html/javascript, you'll need to pass the data to be graphed with your call to the external object. For example, if you want to use GDGraph, you could create a separate cgi script that returns graphs based on params passed to it, and return an approapriate image tag to from your graphing module. For example:
+Another inline solution is to use the <img src="data:uri"> scheme. An example of this can be found in L<CGI::Application::Plugin::DBIProfile::Graph::GDGraphInline>. Please note, this isn't supported under MSIE.
+
+In order to generate a graph that isn't inline, you'll need to pass the data to be graphed with your call to the external object. For example, if you want to use GDGraph, you could create a separate cgi script that returns graphs based on params passed to it, and return an approapriate image tag to from your graphing module. For example:
 
     <img src="/cgi-bin/graph.pl?data=20,14,42&tags=1,2,3">
 
-Another way, would be to add a runmode in a CGI::Application "init" hook, and pass that runmode in a link back to the same script, and include your graph module in our script with a use statement. For example:
+Another way, would be to add a runmode in a CGI::Application "init" hook, and pass that runmode in a link back to the same script, and include your graph module in our script with a use statement. An example of this can be found in L<CGI::Application::Plugin::DBIProfile::Graph::SVGTT>.
 
-    sub import {
-        my $c = scalar caller;
-        $c->add_callback( 'init' => \&_add_runmode );
-    }
-
-    sub _add_runmode {
-        my $self = shift;
-        $self->run_modes( my_dbiprof_graph => \&graph );
-    }
-    sub build_graph {
-        my $class = shift;
-        my %opts = @_;
-        return "<img src="?$opts{mode_param}=my_dbiprof_graph&data=20,14,42&tags=1,2,3">\n";
-    }
-    sub graph {
-        ... build your graph image and return it in CGI::Application style...
-    }
 
 =head1 REQUIREMENTS
 
@@ -203,6 +188,8 @@ Another way, would be to add a runmode in a CGI::Application "init" hook, and pa
 =head1 SEE ALSO
 
     L<CGI::Application::Plugin::DBIProfile>
+    L<CGI::Application::Plugin::DBIProfile::Graph::GDGraphInline>
+    L<CGI::Application::Plugin::DBIProfile::Graph::SVGTT>
 
 =head1 AUTHOR
 
