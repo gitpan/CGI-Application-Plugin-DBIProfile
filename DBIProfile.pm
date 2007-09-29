@@ -14,7 +14,7 @@ use Data::JavaScript;
 
 use vars qw($VERSION);
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub import
 {
@@ -75,7 +75,7 @@ sub _devpopup_stop
 
     $self->devpopup->add_report(
         title => 'DBI Profile',
-        summary => '',
+        summary => 'DBI statement profiling',
         report => qq(
         <style type="text/css">
         tr.even{background-color:#eee}
@@ -315,8 +315,6 @@ our $TEMPLATE = <<END;
   <div id="#DBIPS_<tmpl_var sort>" class="report_summary"></div>
   <div id="#DBIPR_<tmpl_var sort>" class="report_full" style="display:none">
 
-    <h1><tmpl_var profile_title></h1>
-
     <span><tmpl_var profile_graph></span>
 
     <table border=0 width=100% cellspacing=0 style="margin: 5px">
@@ -396,17 +394,30 @@ CGI::Application::Plugin::DBIProfile provides popup (using CAP::DevPopup if avai
 
 =head1 CONFIGURATION
 
-To enable, set the DBI_Profile environment variables. For example, in apache:
+To enable, set the DBI_PROFILE environment variables. For example
 
-    SetVar DBI_Profile 2/CGI::Application::Plugin::DBIProfile::Driver
+=over
+
+=item in apache config for cgi
+
+    SetVar DBI_PROFILE 2/CGI::Application::Plugin::DBIProfile::Driver
     SetVar CAP_DBIPROFILE_EXEC 1
 
-Or for mod_perl:
+=item in apache config for mod_perl
 
-    PerlSetVar DBI_Profile 2/CGI::Application::Plugin::DBIProfile::Driver
+    PerlSetVar DBI_PROFILE 2/CGI::Application::Plugin::DBIProfile::Driver
     PerlSetVar CAP_DBIPROFILE_EXEC 1
 
-If you disable it, be sure to unset the DBI_Profile env var, as it will continue to accumulate stats regardless of the setting of CAP_DBIPROFILE_EXEC, you just won't see them.
+=item in your CAP module
+
+    BEGIN {
+        $ENV{DBI_PROFILE} = '2/CGI::Application::Plugin::DBIProfile::Driver';
+        $ENV{CAP_DBIPROFILE_EXEC} = 1;
+    }
+
+=back
+
+If you disable it, be sure to unset the DBI_PROFILE env var, as it will continue to accumulate stats regardless of the setting of CAP_DBIPROFILE_EXEC, you just won't see them.
 
 =head2 MODES OF OPERATION
 
@@ -487,6 +498,8 @@ For CGI::Application::Plugin::DBIProfile::Graph::HTMLBarGraph support.
 =item L<CGI::Application::Plugin::DBIProfile::Driver>
 
 =item L<CGI::Application::Plugin::DBIProfile::Graph::HTML>
+
+=item L<CGI::Application::Plugin::DBIProfile::Graph::HTML::Horizontal>
 
 =item L<CGI::Application::Plugin::DBIProfile::Graph::HTMLBarGraph>
 

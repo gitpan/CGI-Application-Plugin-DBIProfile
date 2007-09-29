@@ -8,6 +8,7 @@ DBIProfile.pm
 DBIProfile/Data.pm
 DBIProfile/Driver.pm
 DBIProfile/Graph/HTML.pm
+DBIProfile/Graph/HTML/Horizontal.pm
 DBIProfile/Graph/HTMLBarGraph.pm
 DBIProfile/Graph/GDGraphInline.pm
 DBIProfile/Graph/SVGTT.pm

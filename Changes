@@ -1,5 +1,13 @@
 Revision history for CGI-Application-Plugin-DBIProfile
 
+0.05    2007-09-27
+        Added Graph::HTML::Horizontal plugin.
+        BUGFIX: rt 29670 : Duplicate titles in reports.
+        BUGFIX: rt 29669 : Add summary to DevPopup report.
+        BUGFIX: rt 29668 : Unable to set ENV vars via PerlSetVar.
+        BUGFIX: rt 29667 : DBI profile environment var should be UPPER CASE.
+        BUGFIX: rt 29666 : Typo in callback for CAP::DevPopup report.
+
 0.04    2007-09-27
         Added Graph::SVGTT plugin.
         Added Graph::GDGraphInline plugin.
