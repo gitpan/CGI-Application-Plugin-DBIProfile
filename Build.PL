@@ -21,7 +21,7 @@ my $builder = Module::Build->new(
         'GD::Graph'        => 0,
         'SVG::TT::Graph'   => 0,
     },
-    add_to_cleanup      => { FILES => 'CGI-Application-Plugin-DBIProfile-*' },
+    add_to_cleanup      => [ 'CGI-Application-Plugin-DBIProfile-*' ],
     create_makefile_pl  => 'traditional',
 );
 

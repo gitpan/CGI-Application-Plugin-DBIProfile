@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DBIProfile
 
+0.06    2008-12-15
+        BUGFIX: Build.PL had a syntax error in add_to_cleanup.
+
 0.05    2007-09-27
         Added Graph::HTML::Horizontal plugin.
         BUGFIX: rt 29670 : Duplicate titles in reports.

@@ -14,7 +14,7 @@ use Data::JavaScript;
 
 use vars qw($VERSION);
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub import
 {
