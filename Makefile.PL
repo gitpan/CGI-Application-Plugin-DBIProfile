@@ -6,8 +6,8 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME                => 'CGI::Application::Plugin::DBIProfile',
     AUTHOR              => 'Sam Tregar <sam@tregar.com>',
-    VERSION_FROM        => 'DBIProfile.pm',
-    ABSTRACT_FROM       => 'DBIProfile.pm',
+    VERSION_FROM        => 'lib/CGI/Application/Plugin/DBIProfile.pm',
+    ABSTRACT_FROM       => 'lib/CGI/Application/Plugin/DBIProfile.pm',
     PL_FILES            => {},
     PREREQ_PM => {
         'IO::Scalar'       => 0,

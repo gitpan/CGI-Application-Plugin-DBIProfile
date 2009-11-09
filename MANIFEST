@@ -4,13 +4,13 @@ MANIFEST
 META.yml # Will be created by "make dist"
 Makefile.PL
 README
-DBIProfile.pm
-DBIProfile/Data.pm
-DBIProfile/Driver.pm
-DBIProfile/Graph/HTML.pm
-DBIProfile/Graph/HTML/Horizontal.pm
-DBIProfile/Graph/HTMLBarGraph.pm
-DBIProfile/Graph/GDGraphInline.pm
-DBIProfile/Graph/SVGTT.pm
+lib/CGI/Application/Plugin/DBIProfile.pm
+lib/CGI/Application/Plugin/DBIProfile/Data.pm
+lib/CGI/Application/Plugin/DBIProfile/Driver.pm
+lib/CGI/Application/Plugin/DBIProfile/Graph/HTML.pm
+lib/CGI/Application/Plugin/DBIProfile/Graph/HTML/Horizontal.pm
+lib/CGI/Application/Plugin/DBIProfile/Graph/HTMLBarGraph.pm
+lib/CGI/Application/Plugin/DBIProfile/Graph/GDGraphInline.pm
+lib/CGI/Application/Plugin/DBIProfile/Graph/SVGTT.pm
 t/00-load.t
 t/pod.t
